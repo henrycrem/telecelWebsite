@@ -18,12 +18,34 @@ import StoreSection from '@/components/store/page';
 import LocomotiveScroll from 'locomotive-scroll';
 import NewsSection from '@/components/news/page';
 
-
-
-
 export default function Home() {
+  const [productData, setProductData] = useState([]);
+  const [catArray, setcatArray] = useState([]);
+  const [activeTab, setactiveTab] = useState();
+  const [activeTabIndex, setactiveTabIndex] = useState(0);
+  const [activeTabData, setActiveTabData] = useState([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+  const [bestSells, setBestSells] = useState([]);
 
-  // Initialize Locomotive Scroll directly here
+  const productRow = useRef();
+  const context = useContext(MyContext);
+
+  var settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    fade: false,
+    arrows: context.windowWidth < 992 ? false : true,
+  };
+
+  useEffect(() => {
+    getData("/api/categories?populate=*");
+    getBestSellerData(`/api/products?populate=*&[filters][sub_cats][title]=${'Mobiles and Tablets'}`);
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const container = document.querySelector('.scroll-container');
     if (!container) return; // Check if container exists
@@ -36,137 +58,67 @@ export default function Home() {
       scroll.destroy();
     };
   }, []);
-  
-
-
-  
-
-  const [productData, setProductData] = useState([]);
-  const [catArray, setcatArray] = useState([]);
-  const [activeTab, setactiveTab] = useState();
-  const [activeTabIndex, setactiveTabIndex] = useState(0);
-  const [activeTabData, setActiveTabData] = useState([]);
-  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
-  const [bestSells, setBestSells] = useState([]);
-
-  const productRow = useRef();
-
-  const context = useContext(MyContext);
-
-
-  var settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    fade: false,
-    arrows: context.windowWidth < 992 ? false : true,
-  };
-
-
-
-  useEffect(() => {
-
-    getData("/api/categories?populate=*");
-
-    getBestSellerData(`/api/products?populate=*&[filters][sub_cats][title]=${'Mobiles and Tablets'}`)
-   
-    window.scrollTo(0, 0);
-  }, []);
-
-
-
 
   const cat_ARR = [];
   const getData = (apiUrl) => {
     fetchDataFromApi(apiUrl).then(res => {
       setProductData(res);
       context.setProductData(res.data);
-
-
       res.data.length !== 0 && res.data.map((item) => {
         item.attributes.sub_cats.data.map((subCat, index) => {
           cat_ARR.push({
             "title": subCat.attributes.title,
             id: item.id
-          })
-
-        })
-      })
-
-
+          });
+        });
+      });
       const uniqueObject = {};
       const uniqueArray = cat_ARR.filter(obj => {
         const key = JSON.stringify(obj); // Convert object to a string for uniqueness
         return uniqueObject.hasOwnProperty(key) ? false : (uniqueObject[key] = true);
       });
-
       setcatArray(uniqueArray);
-
-      filterBySuCat(uniqueArray[0].title)
-    })
-  }
-
+      filterBySuCat(uniqueArray[0].title);
+    });
+  };
 
   const getBestSellerData = (apiUrl) => {
     fetchDataFromApi(apiUrl).then(res => {
       setBestSells(res);
-    })
-  }
-
-
+    });
+  };
 
   var filterProducts = [];
 
   const filterBySuCat = (title) => {
     filterProducts = [];
     fetchDataFromApi(`/api/products?populate=*&[filters][sub_cats][title]=${title}&pagination[start]=0&pagination[limit]=10`).then(res => {
-      //console.log(res.data);
-
       res.data?.length !== 0 && res.data !== undefined &&
         res.data?.map((item) => {
-          filterProducts.push(item)
-        })
-
+          filterProducts.push(item);
+        });
       setActiveTabData(filterProducts);
-
       setTimeout(() => {
         setIsLoadingProducts(false);
       }, [500]);
-
-    })
-  }
+    });
+  };
 
   return (
     <>
-      {/* <div style={{ display: 'block' }} className="scroll-container"> */}
+      <div style={{ display: 'block' }} className="scroll-container">
         <div style={{ display: 'block' }}>
-
-        <SliderBanner />
-
-       
-            <Banners />
-
-            <div style={{paddingTop: "40px", paddingBottom: "60px"}} >
-
-            <Items/>
-            </div>
-
-            <SecondSection/>
-
-          
-            <PricingPage/>
-
-          
-
-
-
-            <StoreSection/>
-
-            <NewsSection/>
-
+          <SliderBanner />
+          <Banners />
+          <div style={{ paddingTop: "40px", paddingBottom: "60px" }}>
+            <Items />
+          </div>
+          <SecondSection />
+          <PricingPage />
+          <StoreSection />
+          <NewsSection />
+        </div>
       </div>
     </>
-  )
+  );
 }

@@ -8,8 +8,7 @@ import { fetchDataFromApi } from "@/utils/api";
 
 import Product from "@/components/product";
 
-const RelatedProducts = (props)=>{
-
+const RelatedProducts = (props) => {
     const [relatedProducts, setRelatedProducts] = useState([]);
     const context = useContext(MyContext);
 
@@ -23,40 +22,39 @@ const RelatedProducts = (props)=>{
         arrows: context.windowWidth > 992 ? true : false
     };
 
+    useEffect(() => {
+        // Ensure this code only runs on the client side
+        if (typeof window !== 'undefined') {
+            getRelatedProducts(`/api/products?populate=*&[filters][id][$ne]=${props.prodId}&[filters][categories][id]=${props.catId}`);
+        }
+    }, []);
 
-    useEffect(()=>{
-        getRelatedProducts(`/api/products?populate=*&[filters][id][$ne]=${props.prodId}&[filters][categories][id]=${props.catId}`);
-    },[]);
-
-
-    const getRelatedProducts=(url)=>{
+    const getRelatedProducts = (url) => {
         fetchDataFromApi(url).then(res => {
             setRelatedProducts(res.data);
         })
     }
 
-    return(
+    return (
         <>
-          <div className='relatedProducts homeProductsRow2  pt-5 pb-4'>
-                        <h2 class="hd mb-0 mt-0">Related products</h2>
-                        <br className='res-hide' />
-                        <Slider {...related} className='prodSlider'>
-
-                            {
-
-                                relatedProducts.length !== 0 &&
-                                relatedProducts.map((product, index) => {
-                                    return (
-                                        <div className='item' key={index}>
-                                            <Product item={product} itemId={product.id}   />
-                                        </div>
-                                    )
-                                })
-                            }
-
-                        </Slider>
-                    </div>
-
+            <div className='relatedProducts homeProductsRow2  pt-5 pb-4'>
+                <h2 class="hd mb-0 mt-0">Related products</h2>
+                <br className='res-hide' />
+                {context.windowWidth && (
+                    <Slider {...related} className='prodSlider'>
+                        {
+                            relatedProducts.length !== 0 &&
+                            relatedProducts.map((product, index) => {
+                                return (
+                                    <div className='item' key={index}>
+                                        <Product item={product} itemId={product.id} />
+                                    </div>
+                                )
+                            })
+                        }
+                    </Slider>
+                )}
+            </div>
         </>
     )
 }

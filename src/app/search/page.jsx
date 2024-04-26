@@ -14,7 +14,6 @@ import noData from '../../assets/images/noData.webp';
 import Image from "next/image";
 
 const Search = ({ params }) => {
-
     const [catData, setcatData] = useState([]);
     const [productsData, setProductsData] = useState([]);
     const [productsData2, setProductsData2] = useState([]);
@@ -22,9 +21,12 @@ const Search = ({ params }) => {
     const context = useContext(MyContext);
 
     useEffect(() => {
-        getCat("/api/categories?populate=*");
-        setProductsData(context.searchData);
-        setProductsData2(context.searchData);
+        // Ensure this code only runs on the client side
+        if (typeof window !== 'undefined') {
+            getCat("/api/categories?populate=*");
+            setProductsData(context.searchData);
+            setProductsData2(context.searchData);
+        }
     }, []);
 
 
@@ -68,10 +70,6 @@ const Search = ({ params }) => {
 
             <section className='listingPage'>
                 <div className='container-fluid'>
-
-            
-
-
                     <div className='listingData'>
                         <div className='row'>
                             <div className={`col-md-3 sidebarWrapper ${context.isOpenFilters === true && 'click'}`}>
@@ -81,23 +79,14 @@ const Search = ({ params }) => {
                                         filterByRating={filterByRating}
                                         filterByPrice={filterByPrice} />
                                 }
-
                             </div>
 
-
                             <div className='col-md-9 rightContent homeProducts pt-0'>
-
                                 <div className='topStrip d-flex align-items-center pt-3'>
                                     <p className='mb-0'>We found <span className='text-success'>{productsData.length}</span> items for you!</p>
-                                  
                                 </div>
 
-
                                 <div className='productRow pl-4 pr-3'>
-
-
-
-
                                     {
                                         productsData.length !== 0 ?
                                             productsData.map((item, index) => {
@@ -114,17 +103,10 @@ const Search = ({ params }) => {
                                                 <Image src={noData} alt="nodata" />
                                             </div>
                                     }
-
-
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
-
-
                 </div>
             </section>
         </>
