@@ -1,0 +1,31 @@
+.containers{
+    padding: 90px;
+
+}
+
+.btnStyle{
+    background-color: red;
+}
+
+.red-bg {
+    background-color: #E32522;
+    color: white; /* Ensure text is visible on the red background */
+  }
+  
+  .black-bg {
+    background-color: #000000; /* Shinning Black */
+    color: white; /* Ensure text is visible on the black background */
+  }
+  
+  .custom-card {
+    border-bottom: 5px solid grey; /* Set border thickness */
+    border-top: 5px solid grey; /* Set border thickness */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.5); /* Add red shadow */
+  }
+  
+  .custom-card:hover {
+    box-shadow: 0px 8px 16px rgba(255, 0, 0, 0.8); /* Add hover effect */
+  }
+  

@@ -1,0 +1,204 @@
+.text-brand {
+    --tw-text-opacity: 1;
+    color: rgb(227 37 38 / var(--tw-text-opacity));
+}
+
+.text-heading_sm {
+    font-size: 30px;
+    line-height: 32px;
+}
+
+.text-body_base {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+containers {
+    max-width: 1440px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.flex {
+    display: flex;
+}
+
+
+.gap-5 {
+    gap: 20px;
+}
+
+.md\:items-center {
+    align-items: center;
+}
+
+.bg-surface_brand {
+    --tw-bg-opacity: 1;
+    background-color: rgb(227 37 38 / var(--tw-bg-opacity));
+}
+
+.fill-negative {
+    fill: #f7f7f7;
+}
+
+.text-subtitle {
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.text-negative {
+    --tw-text-opacity: 1;
+    color: rgb(247 247 247 / var(--tw-text-opacity));
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button {
+    
+    background-color: transparent;
+    background-image: none;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+
+.banner, .card-background {
+    background-size: cover;
+    border-radius: 11px;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.card-background {
+    background-image: url(https://telecel.com.gh/static/pre-order-cd924fd6727fdd9966fdf479f3bfe8f5.webp);
+}
+
+.ease-in-out {
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.duration-300 {
+    transition-duration: .3s;
+}
+
+.transition-transform {
+    transition-duration: .15s;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+}
+
+.shadow-lg, .shadow-sm {
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-lg {
+    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, .1), 0 4px 6px -4px rgba(0, 0, 0, .1);
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+}
+
+.bg-surface_disabled {
+    --tw-bg-opacity: 1;
+    background-color: rgb(179 178 178 / var(--tw-bg-opacity));
+}
+
+.bg-red_500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(227 37 38 / var(--tw-bg-opacity));
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.relative {
+    position: relative;
+}
+
+.transform {
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.h-full {
+    height: 100%;
+}
+
+.backdrop-blur-2xl {
+    --tw-backdrop-blur: blur(40px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.bg-opacity-75 {
+    --tw-bg-opacity: 0.75;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.mb-2 {
+    margin-bottom: 8px;
+}
+
+ .box:hover img{transform: scale(1.1); }
+
+ .elementskit-btn {
+    color: #FFFFFF;
+    background-color: #D42038;
+}
+
+.shiningText {
+    color: 'black';
+    font-weight: bolder;
+  }
+
+  .containerss {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin: 0 auto; /* Center the container horizontally */
+    width: 100%; /* Ensure container takes full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .flex-item {
+    flex: 1 0 33.33%; /* Each item takes 33.33% of the container's width initially */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .flex-item {
+      flex: 1 0 100%; /* Each item takes 100% of the container's width on smaller devices */
+    }
+  }
+  
+  .img-style{
+    border-radius: 15px;
+  }
